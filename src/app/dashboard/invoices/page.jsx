@@ -10,6 +10,7 @@ import { fetchInvoicesPages } from "@/app/lib/data"
 import { CreateInvoice } from "@/app/ui/invoices/buttons"
 
 export default async function Page({ params, searchParams }) {
+  console.log("==============================================")
   console.log("from invoice page",searchParams,params)
   const query = searchParams?.query || ""
   const currentPage = Number(searchParams?.page) || 1
