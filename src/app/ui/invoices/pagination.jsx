@@ -1,24 +1,25 @@
-"use client"; // Import statements...
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import Link from "next/link";
-import { generatePagination } from "@/app/lib/utils";
-import { usePathname, useSearchParams } from "next/navigation";
+"use client" // Import statements...
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline"
+import clsx from "clsx"
+import Link from "next/link"
+import { generatePagination } from "@/app/lib/utils"
+import { usePathname, useSearchParams } from "next/navigation"
 export default function Pagination({ totalPages }) {
+  console.log("pagination components render")
   // NOTE: Comment in this code when you get to this point in the course
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
 
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
-  
-  const allPages = generatePagination(currentPage, totalPages);
+  const currentPage = Number(searchParams.get("page")) || 1
 
-    const createPageURL = (pageNumber) => {
-      const params = new URLSearchParams(searchParams);
-      params.set("page", pageNumber.toString());
-      return `${pathname}?${params.toString()}`;
-    };
- 
+  const allPages = generatePagination(currentPage, totalPages)
+
+  const createPageURL = (pageNumber) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("page", pageNumber.toString())
+    return `${pathname}?${params.toString()}`
+  }
+
   return (
     <>
       {/* NOTE: Comment in this code when you get to this point in the course */}
@@ -32,12 +33,12 @@ export default function Pagination({ totalPages }) {
 
         <div className="flex -space-x-px">
           {allPages.map((page, index) => {
-            let position;
-            
-            if (index === 0) position = 'first';
-            if (index === allPages.length - 1) position = 'last';
-            if (allPages.length === 1) position = 'single';
-            if (page === '...') position = 'middle';
+            let position
+
+            if (index === 0) position = "first"
+            if (index === allPages.length - 1) position = "last"
+            if (allPages.length === 1) position = "single"
+            if (page === "...") position = "middle"
 
             return (
               <PaginationNumber
@@ -47,7 +48,7 @@ export default function Pagination({ totalPages }) {
                 position={position}
                 isActive={currentPage === page}
               />
-            );
+            )
           })}
         </div>
 
@@ -58,7 +59,7 @@ export default function Pagination({ totalPages }) {
         />
       </div>
     </>
-  );
+  )
 }
 
 function PaginationNumber({ page, href, isActive, position }) {
@@ -71,15 +72,15 @@ function PaginationNumber({ page, href, isActive, position }) {
       "hover:bg-gray-100": !isActive && position !== "middle",
       "text-gray-300": position === "middle",
     }
-  );
+  )
 
   return isActive || position === "middle" ? (
     <div className={className}>{page}</div>
   ) : (
     <Link href={href} passHref className={className}>
-    {page}
+      {page}
     </Link>
-  );
+  )
 }
 
 function PaginationArrow({ href, direction, isDisabled }) {
@@ -91,20 +92,20 @@ function PaginationArrow({ href, direction, isDisabled }) {
       "mr-2 md:mr-4": direction === "left",
       "ml-2 md:ml-4": direction === "right",
     }
-  );
+  )
 
   const icon =
     direction === "left" ? (
       <ArrowLeftIcon className="w-4" />
     ) : (
       <ArrowRightIcon className="w-4" />
-    );
+    )
 
   return isDisabled ? (
     <div className={className}>{icon}</div>
   ) : (
     <Link href={href} passHref className={className}>
-     {icon}
+      {icon}
     </Link>
-  );
+  )
 }
