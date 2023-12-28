@@ -16,6 +16,12 @@ const links = [
     name: "Invoices",
     href: "/dashboard/invoices",
     icon: DocumentDuplicateIcon,
+    submenu:true,
+    subMenuItems:[
+      {name:"All", href:"dashboard/invoices"},
+      {name:"Web Design", href:"dashboard/invoices/web-design"},
+      {name:"Graphic Design", href:"dashboard/invoices/graphic-design"},
+    ]
   },
   { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
 ]
