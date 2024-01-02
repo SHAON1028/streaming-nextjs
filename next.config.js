@@ -3,6 +3,6 @@ const nextConfig = {}
 
 module.exports = {
   images: {
-    domains: ["https://digicruiter-indoor.adnarchive.com"],
+    domains: ["digicruiter-indoor.adnarchive.com"],
   },
 }
